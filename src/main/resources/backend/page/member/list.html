@@ -169,22 +169,22 @@
                       }, true)
                   }
               },
-              //状态修改
+
               statusHandle(row) {
                   this.id = row.id
                   this.status = row.status
-                  this.$confirm('确认调整该账号的状态?', '提示', {
-                      'confirmButtonText': '确定',
-                      'cancelButtonText': '取消',
+                  this.$confirm('Are you sure to change state?', 'Change state', {
+                      'confirmButtonText': 'confirm',
+                      'cancelButtonText': 'cancel',
                       'type': 'warning'
                   }).then(() => {
-                      enableOrDisableEmployee({'id': this.id, 'status': !this.status ? 1 : 0}).then(res => {
+                      enableOrDisableEmployee({'id': this.id, 'status': !this.status}).then(res => {
                           if (String(res.code) === '1') {
-                              this.$message.success('账号状态更改成功！')
+                              this.$message.success('Change state successfully！')
                               this.handleQuery()
                           }
                       }).catch(err => {
-                          this.$message.error('请求出错了：' + err)
+                          this.$message.error('request error：' + err)
                       })
                   })
               },

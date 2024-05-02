@@ -22,6 +22,12 @@ public class EmployeeController {
     @Resource
     private EmployeeService employeeService;
 
+    /**
+     * Login
+     * @param request
+     * @param employee
+     * @return
+     */
     @PostMapping("/login")
     public R<Employee> login(HttpServletRequest request, @RequestBody Employee employee) {
         // MD5
@@ -44,6 +50,11 @@ public class EmployeeController {
         return R.success(emp);
     }
 
+    /**
+     * Logout
+     * @param request
+     * @return
+     */
     @PostMapping("/logout")
     public R<String> logout(HttpServletRequest request){
         // remove id from session
@@ -51,6 +62,12 @@ public class EmployeeController {
         return R.success("Exit successfully");
     }
 
+    /**
+     * Create new employee
+     * @param employee
+     * @param request
+     * @return
+     */
     @PostMapping
     public R<String> save(@RequestBody Employee employee, HttpServletRequest request) {
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
@@ -64,6 +81,13 @@ public class EmployeeController {
         return R.success("Add employee successfully");
     }
 
+    /**
+     * Pagination
+     * @param page
+     * @param limit
+     * @param name
+     * @return
+     */
     @GetMapping("/page")
     public R<Page> page(int page, int limit, String name) {
 
@@ -76,5 +100,21 @@ public class EmployeeController {
         employeeService.page(pageInfo, queryWrapper);
 
         return R.success(pageInfo);
+    }
+
+    /**
+     * Change state of employee
+     * @param employee
+     * @param request
+     * @return
+     */
+    @PutMapping
+    public R<String> update(@RequestBody Employee employee, HttpServletRequest request) {
+        log.info(employee.toString());
+        Long empId = (Long)request.getSession().getAttribute("employee");
+        employee.setUpdateUser(empId);
+        employee.setUpdateTime(LocalDateTime.now());
+        employeeService.updateById(employee);
+        return R.success("change state of employee successfully");
     }
 }

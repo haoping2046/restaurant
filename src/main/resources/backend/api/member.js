@@ -6,7 +6,7 @@ function getMemberList (params) {
   })
 }
 
-// 修改---启用禁用接口
+// change state of employee
 function enableOrDisableEmployee (params) {
   return $axios({
     url: '/employee',

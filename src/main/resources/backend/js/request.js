@@ -44,7 +44,7 @@
 
   // response of interceptors
   service.interceptors.response.use(res => {
-      console.log('---Response interceptor---',res)
+      // console.log('---Response interceptor---',res)
       if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// return login page
         // MessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', {
         //     confirmButtonText: '重新登录',
