@@ -3,11 +3,11 @@ function trim (str) {
 }
 
 function requestUrlParam(argname){
-  var url = location.href
-  var arrStr = url.substring(url.indexOf("?")+1).split("&")
-  for(var i =0;i<arrStr.length;i++)
+  const url = location.href
+  const arrStr = url.substring(url.indexOf("?")+1).split("&")
+  for(let i =0;i<arrStr.length;i++)
   {
-      var loc = arrStr[i].indexOf(argname+"=")
+      const loc = arrStr[i].indexOf(argname+"=")
       if(loc!=-1){
           return arrStr[i].replace(argname+"=","").replace("?","")
       }

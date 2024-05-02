@@ -146,10 +146,10 @@
                       if (String(res.code) === '1') {
                           console.log(res.data)
                           this.ruleForm = res.data
-                          this.ruleForm.sex = res.data.sex === '0' ? '女' : '男'
+                          this.ruleForm.sex = res.data.sex === '0' ? 'female' : 'male'
                           // this.ruleForm.password = ''
                       } else {
-                          this.$message.error(res.msg || '操作失败')
+                          this.$message.error(res.msg || 'Operation failed')
                       }
                   })
               },
@@ -160,12 +160,12 @@
                         return false;
                       }
 
-                      if (this.actionType === 'add') {
-                          const params = {
-                              ...this.ruleForm,
-                              sex: this.ruleForm.sex === 'female' ? '0' : '1'  // 0：female 1: male
-                          }
+                      const params = {
+                        ...this.ruleForm,
+                        sex: this.ruleForm.sex === 'female' ? '0' : '1'  // 0：female 1: male
+                      }
 
+                      if (this.actionType === 'add') {
                           addEmployee(params).then(res => {
                               if (res.code === 1) {
                                   this.$message.success('Add an employee successfully！')
@@ -192,10 +192,6 @@
                       }
 
                       if (this.actionType === 'edit') {
-                          const params = {
-                              ...this.ruleForm,
-                              sex: this.ruleForm.sex === 'female' ? '0' : '1'
-                          }
                           editEmployee(params).then(res => {
                               if (res.code === 1) {
                                   this.$message.success('Edit an employee successfully！')

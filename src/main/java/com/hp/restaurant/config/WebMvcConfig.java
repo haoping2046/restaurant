@@ -21,7 +21,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        log.info("set up static resource mapping...");
+//        log.info("set up static resource mapping...");
         registry.addResourceHandler("/backend/**").addResourceLocations("classpath:/backend/"); // classpath就是resources
         registry.addResourceHandler("/front/**").addResourceLocations("classpath:/front/");
     }

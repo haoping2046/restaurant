@@ -15,7 +15,7 @@ function enableOrDisableEmployee (params) {
   })
 }
 
-// 新增---添加员工
+// add an employee
 function addEmployee (params) {
   return $axios({
     url: '/employee',
@@ -24,7 +24,7 @@ function addEmployee (params) {
   })
 }
 
-// 修改---添加员工
+// edit and employee
 function editEmployee (params) {
   return $axios({
     url: '/employee',

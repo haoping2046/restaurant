@@ -13,7 +13,7 @@ public class RestaurantApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(RestaurantApplication.class, args);
-        log.info("Project start successfully!");
+//        log.info("Project start successfully!");
     }
 
 }
