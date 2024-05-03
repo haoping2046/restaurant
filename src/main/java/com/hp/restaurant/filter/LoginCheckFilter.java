@@ -1,6 +1,7 @@
 package com.hp.restaurant.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.hp.restaurant.common.BaseContext;
 import com.hp.restaurant.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
@@ -37,6 +38,8 @@ public class LoginCheckFilter implements Filter {
 
         // if it needs to process, check if user login
         if(request.getSession().getAttribute("employee") != null) {
+            Long id = (Long)request.getSession().getAttribute("employee");
+            BaseContext.setCurrentId(id);
             filterChain.doFilter(request, response);
             return;
         }
