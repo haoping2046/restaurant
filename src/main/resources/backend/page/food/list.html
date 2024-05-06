@@ -75,7 +75,7 @@
         </el-table-column>
         <el-table-column
           prop="categoryName"
-          label="菜品分类"
+          label="dish category"
         ></el-table-column>
         <el-table-column label="售价">
           <template slot-scope="scope">
@@ -181,7 +181,7 @@
                 console.log("============");
                 console.log(this.tableData);
             }).catch(err => {
-              this.$message.error('请求出错了：' + err)
+              this.$message.error('The request failed：' + err)
             })
           },
           getImage (image) {
@@ -224,10 +224,10 @@
                   this.$message.success('删除成功！')
                   this.handleQuery()
                 } else {
-                  this.$message.error(res.msg || '操作失败')
+                  this.$message.error(res.msg || 'The operation failed')
                 }
               }).catch(err => {
-                this.$message.error('请求出错了：' + err)
+                this.$message.error('The request failed：' + err)
               })
             })
           },
@@ -258,10 +258,10 @@
                   this.$message.success('菜品状态已经更改成功！')
                   this.handleQuery()
                 } else {
-                  this.$message.error(res.msg || '操作失败')
+                  this.$message.error(res.msg || 'The operation failed')
                 }
               }).catch(err => {
-                  this.$message.error('请求出错了：' + err)
+                  this.$message.error('The request failed：' + err)
               })
             })
           },

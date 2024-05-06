@@ -93,8 +93,8 @@
       </el-table>
       <el-pagination
         class="pageList"
-        :page-sizes="[10, 20, 30, 40]"
-        :page-size="pageSize"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="counts"
         :current-page.sync="page"
@@ -117,7 +117,7 @@
                   input: '',
                   counts: 0,
                   page: 1,
-                  limit: 10,
+                  limit: 5,
                   tableData: [],
                   id: '',
                   status: '',
