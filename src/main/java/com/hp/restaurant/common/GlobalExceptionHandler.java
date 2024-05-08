@@ -16,7 +16,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public R<String> exceptionHandler(SQLIntegrityConstraintViolationException ex) {
-
         log.error(ex.getMessage()); // Duplicate entry 'dave' for key 'employee.idx_username'
 
         if(ex.getMessage().contains("Duplicate entry")) {
@@ -25,5 +24,12 @@ public class GlobalExceptionHandler {
             return R.error(msg);
         }
         return R.error("Unknown error");
+    }
+
+    @ExceptionHandler(CustomException.class)
+    public R<String> exceptionHandler(CustomException ex) {
+        log.error(ex.getMessage());
+
+        return R.error(ex.getMessage());
     }
 }

@@ -44,8 +44,14 @@ public class CategoryController {
      */
     @PostMapping
     public R<String> save(@RequestBody Category category) {
-        log.info("category: {}", category);
         categoryService.save(category);
         return R.success("Create category successfully!");
+    }
+
+    @DeleteMapping
+    public R<String> delete(Long id) {
+        categoryService.remove(id);
+
+        return R.success("Delete category successfully!");
     }
 }

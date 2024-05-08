@@ -13,11 +13,11 @@ const queryCategoryById = (id) => {
   })
 }
 
-const deleCategory = (ids) => {
+const deleCategory = (id) => {
   return $axios({
     url: '/category',
     method: 'delete',
-    params: { ids }
+    params: { id }
   })
 }
 
