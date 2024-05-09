@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- 引入样式 -->
+
     <link rel="stylesheet" href="../../plugins/element-ui/index.css" />
     <link rel="stylesheet" href="../../styles/common.css" />
     <link rel="stylesheet" href="../../styles/page.css" />
@@ -192,9 +192,9 @@
             <el-form-item label="套餐菜品:" class="setmealFood">
               <el-form-item>
                 <div class="addDish">
-                  <span v-if="dishTable.length == 0" class="addBut" @click="openAddDish"> + 添加菜品</span>
+                  <span v-if="dishTable.length == 0" class="addBut" @click="openAddDish"> + add food</span>
                   <div v-if="dishTable.length != 0" class="content">
-                    <div class="addBut" style="margin-bottom: 20px" @click="openAddDish">+ 添加菜品</div>
+                    <div class="addBut" style="margin-bottom: 20px" @click="openAddDish">+ add food</div>
                     <div class="table">
                       <el-table :data="dishTable" style="width: 100%">
                         <el-table-column prop="name" label="名称" width="180" align="center"></el-table-column>
@@ -259,7 +259,7 @@
           <div class="subBox address">
             <el-form-item>
               <el-button @click="goBack()"> 取消 </el-button>
-              <el-button type="primary" @click="submitForm('ruleForm', false)"> 保存 </el-button>
+              <el-button type="primary" @click="submitForm('ruleForm', false)"> save </el-button>
               <el-button
                 v-if="actionType == 'add'"
                 type="primary"
@@ -273,7 +273,7 @@
         </el-form>
       </div>
       <el-dialog
-        title="添加菜品"
+        title="add food"
         class="addDishList"
         :visible.sync="dialogVisible"
         width="60%"
@@ -282,7 +282,7 @@
         <el-input
           v-model="value"
           class="seachDish"
-          placeholder="请输入菜品名称进行搜索"
+          placeholder="请输入name进行搜索"
           style="width: 250px"
           size="small"
           clearable
@@ -366,11 +366,11 @@
         </span>
       </el-dialog>
     </div>
-    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+
     <script src="../../plugins/vue/vue.js"></script>
-    <!-- 引入组件库 -->
+
     <script src="../../plugins/element-ui/index.js"></script>
-    <!-- 引入axios -->
+
     <script src="../../plugins/axios/axios.min.js"></script>
     <script src="../../js/request.js"></script>
     <script src="../../api/combo.js"></script>
@@ -724,7 +724,7 @@
             this.checkList = this.dishListCache
           },
 
-          // 删除
+          // delete
           delCheck (ind){
             this.checkedList.splice(ind, 1)
           }

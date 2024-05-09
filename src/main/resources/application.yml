@@ -18,3 +18,5 @@ global-config:
     db-config:
         id-type: ASSIGN_ID
 
+image-file:
+    path: C:\MyProject_output\restaurant\image\
