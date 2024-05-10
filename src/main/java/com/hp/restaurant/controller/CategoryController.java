@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -37,11 +38,6 @@ public class CategoryController {
         return R.success(pageInfo);
     }
 
-    /**
-     *
-     * @param category
-     * @return
-     */
     @PostMapping
     public R<String> save(@RequestBody Category category) {
         categoryService.save(category);
@@ -58,5 +54,20 @@ public class CategoryController {
     public R<String> update(@RequestBody  Category category) {
         categoryService.updateById(category);
         return R.success("Edit category successfully!");
+    }
+
+    /**
+     * Show dish category when adding a dish
+     * @param category
+     * @retu
+     */
+    @GetMapping("/list")
+    public R<List<Category>> list(Category category) {
+        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(category.getType() != null, Category::getType, category.getType());
+        queryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
+
+        List<Category> list = categoryService.list(queryWrapper);
+        return R.success(list);
     }
 }

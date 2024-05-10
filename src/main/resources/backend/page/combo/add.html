@@ -194,7 +194,7 @@
                 <div class="addDish">
                   <span v-if="dishTable.length == 0" class="addBut" @click="openAddDish"> + add food</span>
                   <div v-if="dishTable.length != 0" class="content">
-                    <div class="addBut" style="margin-bottom: 20px" @click="openAddDish">+ add food</div>
+                    <div class="addBut" style="margin-bottom: 20px" @click="openAddDish">+ add dish</div>
                     <div class="table">
                       <el-table :data="dishTable" style="width: 100%">
                         <el-table-column prop="name" label="名称" width="180" align="center"></el-table-column>
@@ -273,7 +273,7 @@
         </el-form>
       </div>
       <el-dialog
-        title="add food"
+        title="add dish"
         class="addDishList"
         :visible.sync="dialogVisible"
         width="60%"

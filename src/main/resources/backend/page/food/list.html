@@ -16,7 +16,7 @@
       <div class="tableBar">
         <el-input
           v-model="input"
-          placeholder="请输入name"
+          placeholder="Please enter name"
           style="width: 250px"
           clearable
           @keyup.enter.native="handleQuery"
@@ -29,14 +29,14 @@
           ></i>
         </el-input>
         <div class="tableLab">
-          <span class="span-btn delBut non" @click="deleteHandle('批量', null)">batch delete</span>
+          <span class="span-btn delBut non" @click="deleteHandle('batch', null)">batch delete</span>
           <span class="span-btn blueBug non" @click="statusHandle('1')">batch sell</span>
           <span style="border:none;" class="span-btn delBut non" @click="statusHandle('0')">batch stop sale</span>
           <el-button
             type="primary"
             @click="addFoodtype('add')"
           >
-            + add food
+            + add dish
           </el-button>
         </div>
       </div>
@@ -118,7 +118,7 @@
               type="text"
               size="small"
               class="delBut non"
-              @click="deleteHandle('单删', scope.row.id)"
+              @click="deleteHandle('single', scope.row.id)"
             >
               delete
             </el-button>
@@ -191,37 +191,36 @@
             this.page = 1;
             this.init();
           },
-          // 添加
+
           addFoodtype (st) {
             if (st === 'add'){
               window.parent.menuHandle({
                 id: '4',
                 url: '/backend/page/food/add.html',
-                name: 'add food'
+                name: 'add dish'
               },true)
             } else {
               window.parent.menuHandle({
                 id: '4',
                 url: '/backend/page/food/add.html?id='+st,
-                name: '修改菜品'
+                name: 'edit dish'
               },true)
             }
           },
 
-          // delete
           deleteHandle (type, id) {
-            if (type === '批量' && id === null) {
+            if (type === 'batch' && id === null) {
               if (this.checkList.length === 0) {
-                return this.$message.error('请选择删除对象')
+                return this.$message.error('Please select the objects to delete')
               }
             }
-            this.$confirm('确认删除该菜品, 是否继续?', '确定删除', {
-              'confirmButtonText': '确定',
+            this.$confirm('Are you sure to delete this dish. continue?', 'confirm ', {
+              'confirmButtonText': 'confirm ',
               'cancelButtonText': 'cancel',
             }).then(() => {
-              deleteDish(type === '批量' ? this.checkList.join(',') : id).then(res => {
+              deleteDish(type === 'batch' ? this.checkList.join(',') : id).then(res => {
                 if (res.code === 1) {
-                  this.$message.success('删除成功！')
+                  this.$message.success('delete successfully！')
                   this.handleQuery()
                 } else {
                   this.$message.error(res.msg || 'The operation failed')
@@ -232,12 +231,11 @@
             })
           },
 
-          //状态更改
           statusHandle (row) {
             let params = {}
             if (typeof row === 'string' ) {
               if (this.checkList.length === 0) {
-                this.$message.error('批量操作，请先勾选操作菜品！')
+                this.$message.error('Please select the dishes before proceeding！')
                 return false
               }
               params.id = this.checkList.join(',')
@@ -247,15 +245,15 @@
               params.status = row.status ? '0' : '1'
             }
             this.dishState = params
-            this.$confirm('确认更改该菜品状态?', '提示', {
-              'confirmButtonText': '确定',
+            this.$confirm('Confirm the change of this state?', 'Change state', {
+              'confirmButtonText': 'confirm ',
               'cancelButtonText': 'cancel',
               'type': 'warning'
             }).then(() => {
               // 起售停售---批量起售停售接口
               dishStatusByStatus(this.dishState).then(res => {
                 if (res.code === 1) {
-                  this.$message.success('菜品状态已经更改成功！')
+                  this.$message.success('The dish state has been successfully updated！')
                   this.handleQuery()
                 } else {
                   this.$message.error(res.msg || 'The operation failed')
@@ -266,7 +264,6 @@
             })
           },
 
-          // 全部操作
           handleSelectionChange (val){
             let checkArr = []
             val.forEach((n) => {
