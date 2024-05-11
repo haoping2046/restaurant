@@ -52,6 +52,7 @@ CREATE TABLE `dish` (
   `name` varchar(32) COLLATE utf8_bin NOT NULL,
   `category_id` bigint NOT NULL,
   `price` decimal(10,2) DEFAULT NULL,
+  `code` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'product code',
   `image` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `status` int DEFAULT '1' COMMENT '0 sold out 1 selling',
@@ -63,30 +64,30 @@ CREATE TABLE `dish` (
   UNIQUE KEY `idx_dish_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 
-INSERT INTO `dish` VALUES (46,'drink1',11,6.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/41bfcacf-7ad4-4927-8b26-df366553a94c.png','',1,'2022-06-09 22:40:47','2022-06-09 22:40:47',1,1);
-INSERT INTO `dish` VALUES (47,'drink2',11,4.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/4451d4be-89a2-4939-9c69-3a87151cb979.png','People like it!',1,'2022-06-10 09:18:49','2022-06-10 09:18:49',1,1);
-INSERT INTO `dish` VALUES (48,'drink13',11,4.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/bf8cbfc1-04d2-40e8-9826-061ee41ab87c.png','',1,'2022-06-10 09:22:54','2022-06-10 09:22:54',1,1);
-INSERT INTO `dish` VALUES (49,'rice',12,2.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/76752350-2121-44d2-b477-10791c23a8ec.png','Best choice',1,'2022-06-10 09:30:17','2022-06-10 09:30:17',1,1);
-INSERT INTO `dish` VALUES (50,'bread',12,1.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/475cc599-8661-4899-8f9e-121dd8ef7d02.png','Good flour',1,'2022-06-10 09:34:28','2022-06-10 09:34:28',1,1);
-INSERT INTO `dish` VALUES (51,'fish1',20,56.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/4a9cefba-6a74-467e-9fde-6e687ea725d7.png','ingredient',1,'2022-06-10 09:40:51','2022-06-10 09:40:51',1,1);
-INSERT INTO `dish` VALUES (52,'fish2',20,66.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/5260ff39-986c-4a97-8850-2ec8c7583efc.png','ingredient',1,'2022-06-10 09:46:02','2022-06-10 09:46:02',1,1);
-INSERT INTO `dish` VALUES (53,'fish3',20,38.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/a6953d5a-4c18-4b30-9319-4926ee77261f.png','ingredient',1,'2022-06-10 09:48:37','2022-06-10 09:48:37',1,1);
-INSERT INTO `dish` VALUES (54,'dish1',19,18.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/3613d38e-5614-41c2-90ed-ff175bf50716.png','ingredient',1,'2022-06-10 09:51:46','2022-06-10 09:51:46',1,1);
-INSERT INTO `dish` VALUES (55,'dish2',19,18.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/4879ed66-3860-4b28-ba14-306ac025fdec.png','ingredient',1,'2022-06-10 09:53:37','2022-06-10 09:53:37',1,1);
-INSERT INTO `dish` VALUES (56,'dish3',19,18.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/e9ec4ba4-4b22-4fc8-9be0-4946e6aeb937.png','ingredient',1,'2022-06-10 09:55:44','2022-06-10 09:55:44',1,1);
-INSERT INTO `dish` VALUES (57,'dish4',19,18.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/22f59feb-0d44-430e-a6cd-6a49f27453ca.png','ingredient',1,'2022-06-10 09:58:35','2022-06-10 09:58:35',1,1);
-INSERT INTO `dish` VALUES (58,'dish5',18,98.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/c18b5c67-3b71-466c-a75a-e63c6449f21c.png','ingredient',1,'2022-06-10 10:12:28','2022-06-10 10:12:28',1,1);
-INSERT INTO `dish` VALUES (59,'dish6',18,138.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/a80a4b8c-c93e-4f43-ac8a-856b0d5cc451.png','ingredient',1,'2022-06-10 10:24:03','2022-06-10 10:24:03',1,1);
-INSERT INTO `dish` VALUES (60,'dish7',18,58.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/6080b118-e30a-4577-aab4-45042e3f88be.png','ingredient',1,'2022-06-10 10:26:03','2022-06-10 10:26:03',1,1);
-INSERT INTO `dish` VALUES (61,'dish8',18,66.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/13da832f-ef2c-484d-8370-5934a1045a06.png','ingredient',1,'2022-06-10 10:28:54','2022-06-10 10:28:54',1,1);
-INSERT INTO `dish` VALUES (62,'dish9',17,88.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/7694a5d8-7938-4e9d-8b9e-2075983a2e38.png','ingredient',1,'2022-06-10 10:33:05','2022-06-10 10:33:05',1,1);
-INSERT INTO `dish` VALUES (63,'dish10',17,88.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/f5ac8455-4793-450c-97ba-173795c34626.png','ingredient',1,'2022-06-10 10:35:40','2022-06-10 10:35:40',1,1);
-INSERT INTO `dish` VALUES (64,'dish11',17,88.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/7a55b845-1f2b-41fa-9486-76d187ee9ee1.png','ingredient',1,'2022-06-10 10:37:52','2022-06-10 10:37:52',1,1);
-INSERT INTO `dish` VALUES (65,'dish12',16,68.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/b544d3ba-a1ae-4d20-a860-81cb5dec9e03.png','ingredient',1,'2022-06-10 10:41:08','2022-06-10 10:41:08',1,1);
-INSERT INTO `dish` VALUES (66,'dish13',16,119.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/a101a1e9-8f8b-47b2-afa4-1abd47ea0a87.png','ingredient',1,'2022-06-10 10:42:42','2022-06-10 10:42:42',1,1);
-INSERT INTO `dish` VALUES (67,'dish14',16,72.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/8cfcc576-4b66-4a09-ac68-ad5b273c2590.png','ingredient',1,'2022-06-10 10:43:56','2022-06-10 10:43:56',1,1);
-INSERT INTO `dish` VALUES (68,'soup1',21,4.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/c09a0ee8-9d19-428d-81b9-746221824113.png','ingredient',1,'2022-06-10 10:54:25','2022-06-10 10:54:25',1,1);
-INSERT INTO `dish` VALUES (69,'soup2',21,6.00,'https://sky-itcast.oss-cn-beijing.aliyuncs.com/16d0a3d6-2253-4cfc-9b49-bf7bd9eb2ad2.png','ingredient',1,'2022-06-10 10:55:02','2022-06-10 10:55:02',1,1);
+INSERT INTO `dish` VALUES (46,'drink1',11,6.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/41bfcacf-7ad4-4927-8b26-df366553a94c.png','',1,'2022-06-09 22:40:47','2022-06-09 22:40:47',1,1);
+INSERT INTO `dish` VALUES (47,'drink2',11,4.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/4451d4be-89a2-4939-9c69-3a87151cb979.png','People like it!',1,'2022-06-10 09:18:49','2022-06-10 09:18:49',1,1);
+INSERT INTO `dish` VALUES (48,'drink13',11,4.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/bf8cbfc1-04d2-40e8-9826-061ee41ab87c.png','',1,'2022-06-10 09:22:54','2022-06-10 09:22:54',1,1);
+INSERT INTO `dish` VALUES (49,'rice',12,2.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/76752350-2121-44d2-b477-10791c23a8ec.png','Best choice',1,'2022-06-10 09:30:17','2022-06-10 09:30:17',1,1);
+INSERT INTO `dish` VALUES (50,'bread',12,1.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/475cc599-8661-4899-8f9e-121dd8ef7d02.png','Good flour',1,'2022-06-10 09:34:28','2022-06-10 09:34:28',1,1);
+INSERT INTO `dish` VALUES (51,'fish1',20,56.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/4a9cefba-6a74-467e-9fde-6e687ea725d7.png','ingredient',1,'2022-06-10 09:40:51','2022-06-10 09:40:51',1,1);
+INSERT INTO `dish` VALUES (52,'fish2',20,66.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/5260ff39-986c-4a97-8850-2ec8c7583efc.png','ingredient',1,'2022-06-10 09:46:02','2022-06-10 09:46:02',1,1);
+INSERT INTO `dish` VALUES (53,'fish3',20,38.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/a6953d5a-4c18-4b30-9319-4926ee77261f.png','ingredient',1,'2022-06-10 09:48:37','2022-06-10 09:48:37',1,1);
+INSERT INTO `dish` VALUES (54,'dish1',19,18.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/3613d38e-5614-41c2-90ed-ff175bf50716.png','ingredient',1,'2022-06-10 09:51:46','2022-06-10 09:51:46',1,1);
+INSERT INTO `dish` VALUES (55,'dish2',19,18.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/4879ed66-3860-4b28-ba14-306ac025fdec.png','ingredient',1,'2022-06-10 09:53:37','2022-06-10 09:53:37',1,1);
+INSERT INTO `dish` VALUES (56,'dish3',19,18.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/e9ec4ba4-4b22-4fc8-9be0-4946e6aeb937.png','ingredient',1,'2022-06-10 09:55:44','2022-06-10 09:55:44',1,1);
+INSERT INTO `dish` VALUES (57,'dish4',19,18.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/22f59feb-0d44-430e-a6cd-6a49f27453ca.png','ingredient',1,'2022-06-10 09:58:35','2022-06-10 09:58:35',1,1);
+INSERT INTO `dish` VALUES (58,'dish5',18,98.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/c18b5c67-3b71-466c-a75a-e63c6449f21c.png','ingredient',1,'2022-06-10 10:12:28','2022-06-10 10:12:28',1,1);
+INSERT INTO `dish` VALUES (59,'dish6',18,138.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/a80a4b8c-c93e-4f43-ac8a-856b0d5cc451.png','ingredient',1,'2022-06-10 10:24:03','2022-06-10 10:24:03',1,1);
+INSERT INTO `dish` VALUES (60,'dish7',18,58.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/6080b118-e30a-4577-aab4-45042e3f88be.png','ingredient',1,'2022-06-10 10:26:03','2022-06-10 10:26:03',1,1);
+INSERT INTO `dish` VALUES (61,'dish8',18,66.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/13da832f-ef2c-484d-8370-5934a1045a06.png','ingredient',1,'2022-06-10 10:28:54','2022-06-10 10:28:54',1,1);
+INSERT INTO `dish` VALUES (62,'dish9',17,88.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/7694a5d8-7938-4e9d-8b9e-2075983a2e38.png','ingredient',1,'2022-06-10 10:33:05','2022-06-10 10:33:05',1,1);
+INSERT INTO `dish` VALUES (63,'dish10',17,88.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/f5ac8455-4793-450c-97ba-173795c34626.png','ingredient',1,'2022-06-10 10:35:40','2022-06-10 10:35:40',1,1);
+INSERT INTO `dish` VALUES (64,'dish11',17,88.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/7a55b845-1f2b-41fa-9486-76d187ee9ee1.png','ingredient',1,'2022-06-10 10:37:52','2022-06-10 10:37:52',1,1);
+INSERT INTO `dish` VALUES (65,'dish12',16,68.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/b544d3ba-a1ae-4d20-a860-81cb5dec9e03.png','ingredient',1,'2022-06-10 10:41:08','2022-06-10 10:41:08',1,1);
+INSERT INTO `dish` VALUES (66,'dish13',16,119.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/a101a1e9-8f8b-47b2-afa4-1abd47ea0a87.png','ingredient',1,'2022-06-10 10:42:42','2022-06-10 10:42:42',1,1);
+INSERT INTO `dish` VALUES (67,'dish14',16,72.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/8cfcc576-4b66-4a09-ac68-ad5b273c2590.png','ingredient',1,'2022-06-10 10:43:56','2022-06-10 10:43:56',1,1);
+INSERT INTO `dish` VALUES (68,'soup1',21,4.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/c09a0ee8-9d19-428d-81b9-746221824113.png','ingredient',1,'2022-06-10 10:54:25','2022-06-10 10:54:25',1,1);
+INSERT INTO `dish` VALUES (69,'soup2',21,6.00,'1','https://sky-itcast.oss-cn-beijing.aliyuncs.com/16d0a3d6-2253-4cfc-9b49-bf7bd9eb2ad2.png','ingredient',1,'2022-06-10 10:55:02','2022-06-10 10:55:02',1,1);
 
 DROP TABLE IF EXISTS `dish_flavor`;
 CREATE TABLE `dish_flavor` (
@@ -94,33 +95,38 @@ CREATE TABLE `dish_flavor` (
   `dish_id` bigint NOT NULL,
   `name` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `value` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `create_user` bigint DEFAULT NULL,
+  `update_user` bigint DEFAULT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 
-INSERT INTO `dish_flavor` VALUES (40,10,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]');
-INSERT INTO `dish_flavor` VALUES (41,7,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (42,7,'Temperature','[\"hot\",\"normal\",\"less ice\",\"more ice\",\"without ice\"]');
-INSERT INTO `dish_flavor` VALUES (44,6,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (46,6,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (47,5,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (48,5,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]');
-INSERT INTO `dish_flavor` VALUES (49,2,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]');
-INSERT INTO `dish_flavor` VALUES (50,4,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]');
-INSERT INTO `dish_flavor` VALUES (51,3,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]');
-INSERT INTO `dish_flavor` VALUES (52,3,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (86,52,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (87,52,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (88,51,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (89,51,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (92,53,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (93,53,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (94,54,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (95,56,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (96,57,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (97,60,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (101,66,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (102,67,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
-INSERT INTO `dish_flavor` VALUES (103,65,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]');
+INSERT INTO `dish_flavor` VALUES (40,10,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (41,7,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (42,7,'Temperature','[\"hot\",\"normal\",\"less ice\",\"more ice\",\"without ice\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (44,6,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (46,6,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (47,5,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (48,5,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (49,2,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (50,4,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (51,3,'Sugar','[\"no sugar\",\"less sugar\",\"half sugar\",\"more sugar\",\"full sugar\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (52,3,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (86,52,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (87,52,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (88,51,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (89,51,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (92,53,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (93,53,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (94,54,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (95,56,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (96,57,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (97,60,'Diet','[\"green onion\",\"garlic\",\"coriander\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (101,66,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (102,67,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
+INSERT INTO `dish_flavor` VALUES (103,65,'Spicy','[\"no spicy\",\"mild\",\"medium\",\"spicy\"]','2024-05-27 09:37:27', '2021-05-27 09:37:27', 1, 1, 0);
 
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
