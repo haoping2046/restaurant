@@ -56,19 +56,11 @@
         ></el-table-column>
         <el-table-column prop="image" label="pic" align="center">
           <template slot-scope="scope">
-<!--            <el-image style="width: auto; height: 40px; border:none;cursor: pointer;" -->
-<!--            :src="getImage(row.image)" -->
-<!--            :preview-src-list="[ `/common/download?name=${row.image}` ]" >-->
-<!--            <div slot="error" class="image-slot">-->
-<!--              <img src="./../../images/noImg.png"  style="width: auto; height: 40px; border:none;" >-->
-<!--            </div>  -->
-<!--          </el-image>-->
-<!--              http://ret9cpppk.hn-bkt.clouddn.com/0a3b3288-3446-4420-bbff-f263d0c02d8e.jpg-->
-
             <el-image style="width: auto; height: 40px; border:none;cursor: pointer;"
-                      :src="'http://ret9cpppk.hn-bkt.clouddn.com/'+scope.row.image">
+                      :src="getImage(scope.row.image)"
+                      :preview-src-list="[ `/common/download?name=${scope.row.image}` ]">
               <div slot="error" class="image-slot">
-                <img src="http://ret9cpppk.hn-bkt.clouddn.com/noImg.png"  style="width: auto; height: 40px; border:none;" >
+                <img src="../../images/noImg.png"  style="width: auto; height: 40px; border:none;" >
               </div>
             </el-image>
           </template>
@@ -84,7 +76,7 @@
         </el-table-column>
         <el-table-column label="state">
           <template slot-scope="scope">
-            <span style="margin-right: 10px;">{{ scope.row.status == '0' ? '停售' : '启售' }}</span>
+            <span style="margin-right: 10px;">{{ scope.row.status == '0' ? 'stop selling' : 'start selling' }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -112,7 +104,7 @@
               class="blueBug"
               @click="statusHandle(scope.row)"
             >
-              {{ scope.row.status == '0' ? '启售' : '停售' }}
+              {{ scope.row.status == '0' ? 'start selling' : 'stop selling' }}
             </el-button>
             <el-button
               type="text"
@@ -169,7 +161,7 @@
           async init () {
             const params = {
               page: this.page,
-              pageSize: this.pageSize,
+              limit: this.pageSize,
               name: this.input ? this.input : undefined
             }
             await getDishPage(params).then(res => {
@@ -177,9 +169,6 @@
                 this.tableData = res.data.records || []
                 this.counts = res.data.total
               }
-
-                console.log("============");
-                console.log(this.tableData);
             }).catch(err => {
               this.$message.error('The request failed：' + err)
             })

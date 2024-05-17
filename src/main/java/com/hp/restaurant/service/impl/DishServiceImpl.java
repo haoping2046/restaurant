@@ -31,15 +31,9 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         this.save(dishDto); // save to dish table
 
         Long dishId = dishDto.getId();
-
         List<DishFlavor> flavors = dishDto.getFlavors();
-//        flavors.stream().map(item -> {
-//            item.setDishId(dishId);
-//            return item;
-//        }).collect(Collectors.toList());
-
         flavors.forEach(item -> item.setDishId(dishId));
 
-        dishFlavorService.saveBatch(flavors);
+        dishFlavorService.saveBatch(flavors); // save to dish_flavor table
     }
 }

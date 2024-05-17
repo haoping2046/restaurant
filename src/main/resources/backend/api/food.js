@@ -53,17 +53,6 @@ const queryDishList = (params) => {
   })
 }
 
-const commonDownload = (params) => {
-  return $axios({
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    },
-    url: '/common/download',
-    method: 'get',
-    params
-  })
-}
-
 const dishStatusByStatus = (params) => {
   return $axios({
     url: `/dish/status/${params.status}`,
