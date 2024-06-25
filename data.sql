@@ -206,6 +206,7 @@ CREATE TABLE `setmeal` (
   `update_time` datetime DEFAULT NULL,
   `create_user` bigint DEFAULT NULL,
   `update_user` bigint DEFAULT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_setmeal_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
@@ -218,6 +219,11 @@ CREATE TABLE `setmeal_dish` (
   `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT 'redundant fields',
   `price` decimal(10,2) DEFAULT NULL COMMENT 'redundant fields',
   `copies` int DEFAULT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `create_user` bigint(20) NOT NULL,
+  `update_user` bigint(20) NOT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 

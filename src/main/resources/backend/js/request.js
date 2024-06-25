@@ -7,6 +7,7 @@
     // timeout
     timeout: 1000000
   })
+
   // request of interceptor
   service.interceptors.request.use(config => {
     // 是否需要设置 token

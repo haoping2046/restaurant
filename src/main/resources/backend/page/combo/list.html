@@ -16,7 +16,7 @@
       <div class="tableBar">
         <el-input
           v-model="input"
-          placeholder="请输入套餐名称"
+          placeholder="Input combo name"
           style="width: 250px"
           clearable
           @keyup.enter.native="handleQuery"
@@ -29,18 +29,14 @@
           ></i>
         </el-input>
         <div class="tableLab">
-          <span class="span-btn delBut non" @click="deleteHandle('批量')">batch delete</span>
-          <span class="span-btn blueBug non" @click="statusHandle('1')">batch sell</span>
-          <span
-            style="border:none;"
-            class="span-btn delBut non"
-            @click="statusHandle('0')"
-          >batch stop sale</span>
+          <span class="span-btn delBut non" @click="deleteHandle('batch')">delete</span>
+          <span class="span-btn blueBug non" @click="statusHandle('1')">active</span>
+          <span style="border:none;" class="span-btn delBut non" @click="statusHandle('0')">inactive</span>
           <el-button
             type="primary"
             @click="addSetMeal('add')"
           >
-            + 新建套餐
+            + new combo
           </el-button>
         </div>
       </div>
@@ -52,29 +48,29 @@
       >
         <el-table-column
           type="selection"
-          width="25"
+          width="55"
         ></el-table-column>
         <el-table-column
           prop="name"
-          label="套餐名称"
+          label="combo name"
         ></el-table-column>
-        <el-table-column prop="image" label="图片"  align="center">
-<!--          <template slot-scope="{ row }">-->
-<!--            <el-image style="width: auto; height: 40px; border:none;cursor: pointer;" :src="getImage(row.image)" :preview-src-list="[ `/common/download?name=${row.image}` ]" >-->
-<!--              <div slot="error" class="image-slot">-->
-<!--                <img src="./../../images/noImg.png"  style="width: auto; height: 40px; border:none;" >-->
-<!--              </div> -->
-<!--            </el-image>-->
-<!--          </template>-->
-
-          <template slot-scope="scope">
-            <el-image style="width: auto; height: 40px; border:none;cursor: pointer;"
-                      :src="'http://ret9cpppk.hn-bkt.clouddn.com/'+scope.row.image">
+        <el-table-column prop="image" label="pic"  align="center">
+          <template slot-scope="{ row }">
+            <el-image style="width: auto; height: 40px; border:none;cursor: pointer;" :src="getImage(row.image)" :preview-src-list="[ `/common/download?name=${row.image}` ]" >
               <div slot="error" class="image-slot">
-                <img src="http://ret9cpppk.hn-bkt.clouddn.com/noImg.png"  style="width: auto; height: 40px; border:none;" >
+                <img src="./../../images/noImg.png"  style="width: auto; height: 40px; border:none;" >
               </div>
             </el-image>
           </template>
+
+<!--          <template slot-scope="scope">-->
+<!--            <el-image style="width: auto; height: 40px; border:none;cursor: pointer;"-->
+<!--                      :src="'http://ret9cpppk.hn-bkt.clouddn.com/'+scope.row.image">-->
+<!--              <div slot="error" class="image-slot">-->
+<!--                <img src="http://ret9cpppk.hn-bkt.clouddn.com/noImg.png"  style="width: auto; height: 40px; border:none;" >-->
+<!--              </div>-->
+<!--            </el-image>-->
+<!--          </template>-->
         </el-table-column>
         <el-table-column
           prop="categoryName"
@@ -82,24 +78,24 @@
         ></el-table-column>
         <el-table-column
           prop="price"
-          label="套餐价"
+          label="price"
         >
           <template slot-scope="scope">
-            <span>￥{{ scope.row.price/100 }}</span>
+            <span>${{ scope.row.price/100 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="state">
           <template slot-scope="scope">
-            <span>{{ scope.row.status == '0' ? 'stop selling' : 'start selling' }}</span>
+            <span>{{ scope.row.status == '0' ? 'inactive' : 'active' }}</span>
           </template>
         </el-table-column>
         <el-table-column
           prop="updateTime"
-          label="最后操作时间"
+          label="update time"
         >
         </el-table-column>
         <el-table-column
-          label="操作"
+          label="operation"
           width="160"
           align="center"
         >
@@ -110,7 +106,7 @@
               class="blueBug"
               @click="addSetMeal(scope.row.id)"
             >
-              修改
+              edit
             </el-button>
             <el-button
               type="text"
@@ -118,13 +114,13 @@
               class="blueBug"
               @click="statusHandle(scope.row)"
             >
-              {{ scope.row.status == '0' ? 'start selling' : 'stop selling' }}
+              {{ scope.row.status == '0' ? 'active' : 'inactive' }}
             </el-button>
             <el-button
               type="text"
               size="small"
               class="delBut non"
-              @click="deleteHandle('单删', scope.row.id)"
+              @click="deleteHandle('delete', scope.row.id)"
             >
               delete
             </el-button>
@@ -151,7 +147,14 @@
     <script src="../../plugins/axios/axios.min.js"></script>
     <script src="../../js/request.js"></script>
     <script src="../../api/combo.js"></script>
+
+     <script src="//unpkg.com/element-ui"></script>
+     <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+     <script>
+         ELEMENT.locale(ELEMENT.lang.en)
+     </script>
     <script>
+
       new Vue({
         el: '#combo-app',
         data() {
@@ -194,35 +197,34 @@
             this.page = 1;
             this.init();
           },
-          // 添加
+
           addSetMeal (st) {
             if (st === 'add'){
               window.parent.menuHandle({
                 id: '5',
                 url: '/backend/page/combo/add.html',
-                name: '添加套餐'
+                name: 'add combo'
               },true)
             } else {
               window.parent.menuHandle({
                 id: '5',
                 url: '/backend/page/combo/add.html?id='+st,
-                name: '修改套餐'
+                name: 'edit combo'
               },true)
             }
           },
 
-          // delete
           deleteHandle (type, id) {
-            if (type === '批量' && id === null) {
+            if (type === 'batch' && id === null) {
               if (this.checkList.length === 0) {
-                return this.$message.error('请选择删除对象')
+                return this.$message.error('please choose the item you want to delete')
               }
             }
-            this.$confirm('确定删除该套餐, 是否继续?', 'confirm ', {
+            this.$confirm('Are you sure?', 'confirm ', {
               'confirmButtonText': 'confirm ',
               'cancelButtonText': 'cancel',
             }).then(() => {
-              deleteSetmeal(type === '批量' ? this.checkList.join(',') : id).then(res => {
+              deleteSetmeal(type === 'batch' ? this.checkList.join(',') : id).then(res => {
                 if (res.code === 1) {
                   this.$message.success('delete successfully！')
                   this.handleQuery()
@@ -235,12 +237,11 @@
             })
           },
 
-          //状态更改
           statusHandle (row) {
             let params = {}
             if (typeof row === 'string' ){
               if (this.checkList.length == 0){
-                this.$message.error('批量操作，请先勾选操作菜品！')
+                this.$message.error('please select combo！')
                 return false
               }
               params.ids = this.checkList.join(',')
@@ -249,15 +250,15 @@
               params.ids = row.id
               params.status = row.status ? '0' : '1'
             }
-            this.$confirm('确认更改该套餐状态?', '提示', {
+            this.$confirm('Are you sure?', 'Tip', {
               'confirmButtonText': 'confirm ',
               'cancelButtonText': 'cancel',
               'type': 'warning'
             }).then(() => {
-              // 起售停售---批量起售停售接口
+
               setmealStatusByStatus(params).then(res => {
                 if (res.code === 1) {
-                  this.$message.success('套餐状态已经更改成功！')
+                  this.$message.success('change successfully！')
                   this.handleQuery()
                 } else {
                   this.$message.error(res.msg || 'The operation failed')
@@ -268,7 +269,6 @@
             })
           },
 
-          // 全部操作
           handleSelectionChange (val){
             let checkArr = []
             val.forEach((n) => {

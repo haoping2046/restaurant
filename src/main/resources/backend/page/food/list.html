@@ -29,9 +29,9 @@
           ></i>
         </el-input>
         <div class="tableLab">
-          <span class="span-btn delBut non" @click="deleteHandle('batch', null)">batch delete</span>
-          <span class="span-btn blueBug non" @click="statusHandle('1')">batch sell</span>
-          <span style="border:none;" class="span-btn delBut non" @click="statusHandle('0')">batch stop sale</span>
+          <span class="span-btn delBut non" @click="deleteHandle('batch', null)">delete</span>
+          <span class="span-btn blueBug non" @click="statusHandle('1')">active</span>
+          <span style="border:none;" class="span-btn delBut non" @click="statusHandle('0')">inactive</span>
           <el-button
             type="primary"
             @click="addFoodtype('add')"
@@ -48,7 +48,7 @@
       >
         <el-table-column
           type="selection"
-          width="25"
+          width="55"
         ></el-table-column>
         <el-table-column
           prop="name"
@@ -71,12 +71,12 @@
         ></el-table-column>
         <el-table-column label="price">
           <template slot-scope="scope">
-            <span style="margin-right: 10px;">￥{{ scope.row.price/100 }}</span>
+            <span style="margin-right: 10px;">${{ scope.row.price/100 }}</span>
           </template>
         </el-table-column>
         <el-table-column label="state">
           <template slot-scope="scope">
-            <span style="margin-right: 10px;">{{ scope.row.status == '0' ? 'stop selling' : 'start selling' }}</span>
+            <span style="margin-right: 10px;">{{ scope.row.status == '0' ? 'inactive' : 'active' }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -104,7 +104,7 @@
               class="blueBug"
               @click="statusHandle(scope.row)"
             >
-              {{ scope.row.status == '0' ? 'start selling' : 'stop selling' }}
+              {{ scope.row.status == '0' ? 'active' : 'inactive' }}
             </el-button>
             <el-button
               type="text"
@@ -130,13 +130,20 @@
     </div>
   </div>
 
-    <script src="../../plugins/vue/vue.js"></script>
+  <script src="../../plugins/vue/vue.js"></script>
 
-    <script src="../../plugins/element-ui/index.js"></script>
+  <script src="../../plugins/element-ui/index.js"></script>
 
-    <script src="../../plugins/axios/axios.min.js"></script>
-    <script src="../../js/request.js"></script>
-    <script src="../../api/food.js"></script>
+  <script src="../../plugins/axios/axios.min.js"></script>
+  <script src="../../js/request.js"></script>
+  <script src="../../api/food.js"></script>
+
+   <script src="//unpkg.com/element-ui"></script>
+   <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+   <script>
+       ELEMENT.locale(ELEMENT.lang.en)
+   </script>
+
     <script>
       new Vue({
         el: '#food-app',

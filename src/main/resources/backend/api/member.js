@@ -33,7 +33,7 @@ function editEmployee (params) {
   })
 }
 
-// 修改页面反查详情接口
+// need query emp by id when edit an employee
 function queryEmployeeById (id) {
   return $axios({
     url: `/employee/${id}`,

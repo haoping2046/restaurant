@@ -21,7 +21,7 @@ public class LoginCheckFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-        // check if uri need to process
+        // do not need process these urls
         String requestURI = request.getRequestURI();
         String[] urls = new String[] {
                 "/employee/login",
@@ -46,7 +46,6 @@ public class LoginCheckFilter implements Filter {
 
         // if user not login, return login page
         response.getWriter().write(JSON.toJSONString(R.error("NOTLOGIN")));
-        return;
     }
     
     public boolean check(String[] urls, String requestURI) {

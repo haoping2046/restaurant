@@ -12503,6 +12503,7 @@ input[type="number"] {
 .el-checkbox__input.is-indeterminate .el-checkbox__inner {
   background-color: #ffc200;
   border-color: #ffc200;
+
 }
 .el-checkbox__input.is-disabled + span.el-checkbox__label {
   color: #bac0cd;

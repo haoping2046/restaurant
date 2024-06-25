@@ -97,7 +97,7 @@
           </el-form-item>
         </div>
 
-        <el-form-item label="taste preference:">
+        <el-form-item label="requirment:">
           <el-form-item>
             <div class="flavorBox">
               <span
@@ -353,13 +353,12 @@
         methods: {
           async init () {
             queryDishById(this.id).then(res => {
-              console.log(res)
               if (String(res.code) === '1') {
                 this.ruleForm = { ...res.data }
                 this.ruleForm.price = String(res.data.price/100)
                 this.ruleForm.status = res.data.status == '1'
                 this.dishFlavors = res.data.flavors && res.data.flavors.map(obj => ({ ...obj, value: JSON.parse(obj.value),showOption: false }))
-                console.log('this.dishFlavors',this.dishFlavors)
+
                 // this.ruleForm.id = res.data.data.categoryId
                 // this.imageUrl = res.data.data.image
                 this.imageUrl = `/common/download?name=${res.data.image}`
@@ -413,10 +412,9 @@
           getFlavorListHand () {
             // flavor flavorData
             this.dishFlavorsData = [
-              {'name':'Sugar','value':['no sugar','less sugar','half sugar','more sugar','full sugar']},
-              {'name':'Temperature','value':['hot','normal','less ice','more ice','without ice']},
-              {'name':'Preference','value':['green onion','garlic','coriander','spicy']},
-              {'name':'Spicy','value':['no spicy','mild','medium','spicy']}
+              {'name':'Dietary','value':['Low oil','Low salt','Low sugar','Gluten-Free','Vegetarian','Vegan']},
+              {'name':'Allergy','value':['Dairy-Free','Egg-Free','Seafood-Free','Shellfish-Free','Nut-Free', 'Peanut-Free']},
+              {'name':'Others','value':['No onion','No garlic','No spicy']},
             ]
           },
 
@@ -466,7 +464,7 @@
                 delete params.dishFlavors
                 if(!this.imageUrl){
                   this.$message.error('Upload a pic')
-                  return 
+                  return
                 }
                 if (this.actionType == 'add') {
                   delete params.id
@@ -541,7 +539,7 @@
               return file
             }
           },
-          
+
           goBack(){
             window.parent.menuHandle({
               id: '4',

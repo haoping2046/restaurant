@@ -109,6 +109,12 @@
     <script src="../../plugins/axios/axios.min.js"></script>
     <script src="../../js/request.js"></script>
     <script src="../../api/member.js"></script>
+
+    <script src="//unpkg.com/element-ui"></script>
+    <script src="//unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+    <script>
+        ELEMENT.locale(ELEMENT.lang.en)
+    </script>
     <script>
       new Vue({
           el: '#member-app',
@@ -161,7 +167,6 @@
                           name: 'add employee'
                       }, true)
                   } else {
-                      // 这里的st是对应用户的id
                       window.parent.menuHandle({
                           id: '2',
                           url: '/backend/page/member/add.html?id=' + st,
@@ -178,7 +183,8 @@
                       'cancelButtonText': 'cancel',
                       'type': 'warning'
                   }).then(() => {
-                      enableOrDisableEmployee({'id': this.id, 'status': !this.status}).then(res => {
+                      enableOrDisableEmployee({'id': this.id, 'status': !this.status ? 1 : 0}).then(res => {
+
                           if (String(res.code) === '1') {
                               this.$message.success('Change state successfully！')
                               this.handleQuery()

@@ -68,6 +68,7 @@ public class CommonController {
         String originalFilename = imgFile.getOriginalFilename();
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
         String fileName = UUID.randomUUID() + suffix;
+
         return fileName;
     }
 
